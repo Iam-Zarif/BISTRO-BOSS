@@ -10,7 +10,7 @@ const MenuItem = ({ item }) => {
     <div className=" ">
       <div className="flex items-center gap-5">
         <div>
-          <img src={image} alt="" className="w-1/2 rounded-full" />
+          <img placeholder="" src={image} alt="" className="w-1/2 rounded-full" />
         </div>
         <div>
           <p>{name}----------------</p>
