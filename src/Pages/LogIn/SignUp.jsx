@@ -5,14 +5,18 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const SignUp = () => {
-  const {createUser} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const { createUser, updateUserProfile } = useContext(AuthContext);
  
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
   } = useForm();
@@ -22,6 +26,22 @@ const SignUp = () => {
     .then(res => {
       const loggedUser = res.user;
       console.log(loggedUser)
+      updateUserProfile(data.name, data.photo)
+      .then( ()=>{
+        console.log("User updated");
+        reset();
+        Swal.fire({
+          title: "Custom animation with Animate.css",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+        navigate('/login')
+      })
+      .catch(error => console.log(error))
     })
   };
   console.log(watch("example"));
@@ -79,6 +99,24 @@ const SignUp = () => {
                       </span>
                     )}
                   </div>
+
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Photo URL</span>
+                    </label>
+                    <input
+                      name="url"
+                      {...register("photoURL", { required: true })}
+                      type="url"
+                      placeholder="Photo URL"
+                      className="input input-bordered"
+                    />
+                    {errors.photoURL && (
+                      <span className="text-red-600 font-semibold">
+                        photoURL is required
+                      </span>
+                    )}
+                  </div>
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">Password</span>
@@ -112,6 +150,19 @@ const SignUp = () => {
                     </button>
                   </div>
                 </form>
+              </div>
+              <div>
+                <h1>
+                  Already have an account?{" "}
+                  <Link to="/login" className="btn">
+                    LOG IN
+                  </Link>
+                </h1>
+              </div>
+              <div>
+                <Link to="/" className="btn btn-outline">
+                  Home
+                </Link>
               </div>
             </div>
           </div>

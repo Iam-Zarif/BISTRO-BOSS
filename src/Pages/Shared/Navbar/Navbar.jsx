@@ -1,7 +1,18 @@
+/* eslint-disable no-unused-vars */
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProviders";
 
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () =>{
+    logOut()
+    .then(res =>{console.log(res)
+    
+    })
+    .catch(error => console.log(error))
+  }
     const navOpt = (
       <>
         {" "}
@@ -64,22 +75,44 @@ const Navbar = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 font-bold text-white">
               <li>
-                <Link to='/'>HOME</Link>
-              </li>
-              <li >
-                <Link>CONTACT US</Link>
+                <Link to="/">HOME</Link>
               </li>
               <li>
-                <Link to='/menu'>OUR MENU</Link>
+                <Link to='/secret'>SECRET</Link>
               </li>
               <li>
-                <Link to='/order/salad'>OUR SHOP</Link>
+                <Link to="/menu">OUR MENU</Link>
               </li>
-              
+              <li>
+                <Link to="/order/salad">OUR SHOP</Link>
+              </li>
             </ul>
           </div>
-          <div className="navbar-end">
-            <Link className="btn" to='/login'>Login</Link>
+          <div className="navbar-end flex gap-8">
+            {user ? (
+              <>
+                <p className="border px-4 py-2 rounded-xl text-xl font-bold">{user.displayName}</p>
+              </>
+            ) : (
+              <>
+                <Link className="btn" to="/login">
+                  Login
+                </Link>
+              </>
+            )}
+            {user ? (
+              <>
+                <Link className="btn" onClick={handleLogOut}>
+                  LOG OUT
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link className="btn" to="/SignUp">
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </>
