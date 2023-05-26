@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 
+import { Link } from "react-router-dom";
 import Cover from "../../../Pages/Shared/Cover/Cover";
 import MenuItem from "../../../Pages/Shared/MenuItem/MenuItem";
 
@@ -15,6 +16,11 @@ const MenuCategory = ({items,title,img}) => {
             <MenuItem key={item._id} item={item}></MenuItem>
           ))}
         </div>
+        <Link className="flex justify-center my-8" to={`/order/${title}`}>
+          <button className="btn btn-outline border-0 border-b-4 mt-5 ">
+            Order Now
+          </button>
+        </Link>
       </div>
     );
 };

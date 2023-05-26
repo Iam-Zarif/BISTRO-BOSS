@@ -73,15 +73,13 @@ const Navbar = () => {
                 <Link to='/menu'>OUR MENU</Link>
               </li>
               <li>
-                <Link to='/order'>OUR SHOP</Link>
+                <Link to='/order/salad'>OUR SHOP</Link>
               </li>
-              <li>
-                <Link>SIGN UP</Link>
-              </li>
+              
             </ul>
           </div>
           <div className="navbar-end">
-            <Link className="btn">Get started</Link>
+            <Link className="btn" to='/login'>Login</Link>
           </div>
         </div>
       </>
