@@ -1,10 +1,13 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import {  NavLink as Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProviders";
-
+import { FaLuggageCart } from "react-icons/fa";
+import useCart from "../../../UseHooks/useCart";
 
 const Navbar = () => {
+  const [,cart] = useCart()
   const { user, logOut } = useContext(AuthContext);
   const handleLogOut = () =>{
     logOut()
@@ -78,7 +81,7 @@ const Navbar = () => {
                 <Link to="/">HOME</Link>
               </li>
               <li>
-                <Link to='/secret'>SECRET</Link>
+                <Link to="/secret">SECRET</Link>
               </li>
               <li>
                 <Link to="/menu">OUR MENU</Link>
@@ -86,12 +89,23 @@ const Navbar = () => {
               <li>
                 <Link to="/order/salad">OUR SHOP</Link>
               </li>
+              <li>
+                <Link to='/dashboard/myCart'>
+                  <button className="btn ">
+                    {/* FaLuggageCart */}
+                    <FaLuggageCart className="w-10"/>
+                    <div className="badge badge-secondary">+{cart?.length || 0}</div>
+                  </button>
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="navbar-end flex gap-8">
             {user ? (
               <>
-                <p className="border px-4 py-2 rounded-xl text-xl font-bold">{user.displayName}</p>
+                <p className="border px-4 py-2 rounded-xl text-xl font-bold">
+                  {user.displayName}
+                </p>
               </>
             ) : (
               <>

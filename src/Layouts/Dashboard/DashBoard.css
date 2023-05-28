@@ -1,0 +1,6 @@
+.drawer-side a.active {
+  color: rgb(3, 2, 2);
+}
+.drawer-side a {
+  color: rgb(236, 229, 229);
+}

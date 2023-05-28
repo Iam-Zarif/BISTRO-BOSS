@@ -109,7 +109,7 @@ const LogIn = () => {
                 </div>
                 <div className="form-control mt-6">
                   <button
-                    disabled={disable}
+                    disabled={false}
                     className="btn btn-primary"
                     type="submit"
                   >
