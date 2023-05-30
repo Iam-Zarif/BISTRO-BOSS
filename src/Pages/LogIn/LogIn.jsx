@@ -10,6 +10,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -99,7 +100,6 @@ const LogIn = () => {
                   </label>
                   <input
                     onBlur={handleValidateCaptcha}
-                    
                     name="captcha"
                     type="text"
                     placeholder="captcha"
@@ -119,6 +119,7 @@ const LogIn = () => {
               </form>
             </div>
           </div>
+
           <div>
             <h1>
               New to BRISTO BOSS?{" "}
@@ -132,6 +133,7 @@ const LogIn = () => {
               Home
             </Link>
           </div>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

@@ -2,10 +2,36 @@
 import { FaTrashAlt } from "react-icons/fa";
 import Title from "../../../Title/Title";
 import useCart from "../../../UseHooks/useCart";
+import Swal from "sweetalert2";
 
 const MyCart = () => {
+     const [, cart, refetch] = useCart();
+    const handleDelete =(item) =>{
+Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!",
+}).then((result) => {
+  if (result.isConfirmed) {
+    // Swal.fire("Deleted!", "Your file has been deleted.", "success");
+    fetch(`http://localhost:5000/carts/${item._id}`,{
+        method:"DELETE",
+
+    }).then(res => res.json()).then(data =>{
+        if(data.deletedCount>0){
+            refetch();
+Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+    })
+  }
+});
+    }
   Title("BISTRO | MY CART");
-  const [,cart] = useCart();
+ 
   const total = cart.reduce((sum, item) => item.price +sum, 0)
   return (
     <div className="w-full">
@@ -52,7 +78,7 @@ const MyCart = () => {
                   </td>
                   <td className="text-right">${item.price}</td>
                   <td>
-                    <button className="btn"><FaTrashAlt/></button>
+                    <button className="btn" onClick={() => handleDelete(item)}><FaTrashAlt/></button>
                   </td>
                 </tr>
               ))}

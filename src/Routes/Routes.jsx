@@ -1,4 +1,4 @@
-import { createBrowserRouter, } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
 import Home from "../Pages/Home/Home/Home";
 import Menu from "../Components/Menu/Menu";
@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import Error from "../Error/Error";
+import AllUsers from "../Layouts/Dashboard/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -35,10 +36,14 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       { path: "myCart", element: <MyCart></MyCart> },
-      
+      { path: "users", element: <AllUsers></AllUsers> },
     ],
   },
 ]);
