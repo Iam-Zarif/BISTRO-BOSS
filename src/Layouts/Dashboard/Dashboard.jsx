@@ -2,9 +2,11 @@ import { NavLink, Outlet } from "react-router-dom";
 import './DashBoard.css'
 import { FaBook,  FaCalendarAlt,  FaHamburger, FaHome, FaList, FaLuggageCart,  FaPhoneAlt,  FaShoppingBag, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import useCart from "../../UseHooks/useCart";
+import UseAdmin from "../../UseHooks/UseAdmin";
 const Dashboard = () => {
-  const isAdmin =true;
+  // const isAdmin =true;
     const [,cart] = useCart();
+    const [isAdmin] = UseAdmin();
     return (
       <div>
         <div className="drawer drawer-mobile">
@@ -68,7 +70,7 @@ const Dashboard = () => {
                 <>
                   {" "}
                   <li>
-                    <NavLink to="/dashboard/home" className="bg-transparent">
+                    <NavLink to="/" className="bg-transparent">
                       <FaHome />
                       User Home
                     </NavLink>
@@ -102,7 +104,7 @@ const Dashboard = () => {
               )}
               <div className="divider"></div>
               <li>
-                <NavLink className="bg-transparent">
+                <NavLink className="bg-transparent" to='/'>
                   <FaHome /> Home
                 </NavLink>
               </li>
